@@ -1,0 +1,27 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule . /index.html [L]
+
+<FilesMatch "\.(js|jsx)$">
+    ForceType application/javascript
+    Header set Content-Type application/javascript
+</FilesMatch>
+
+<FilesMatch "\.(css)$">
+    ForceType text/css
+    Header set Content-Type text/css
+</FilesMatch>
+
+<FilesMatch "\.(json)$">
+    ForceType application/json
+    Header set Content-Type application/json
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Content-Security-Policy "default-src 'self' https://*.supabase.co https://*.perplexity.ai; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.paypal.com https://*.paypalobjects.com https://*.googleapis.com https://*.datadoghq.com https://*.hcaptcha.com; connect-src 'self' https://*.supabase.co https://*.perplexity.ai https://*.paypal.com https://*.paypalobjects.com https://*.datadoghq.com https://*.hcaptcha.com wss://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.scite.ai; font-src 'self' https://fonts.gstatic.com https://cdn.scite.ai chrome-extension://*; img-src 'self' data: https://* blob:; frame-src 'self' https://*.paypal.com https://*.paypalobjects.com https://*.hcaptcha.com;"
+</IfModule>
